@@ -14,6 +14,7 @@ RUN set -ex \
     wget \
     liblapack-dev \
     libopenblas-dev \
+    libsnappy-java \
  && packages=' \
     numpy \
     pandasql \
@@ -29,7 +30,8 @@ ENV ZEPPELIN_PORT 8080
 ENV ZEPPELIN_HOME /usr/zeppelin
 ENV ZEPPELIN_CONF_DIR $ZEPPELIN_HOME/conf
 ENV ZEPPELIN_NOTEBOOK_DIR $ZEPPELIN_HOME/notebook
-ENV ZEPPELIN_COMMIT 100b97821b8adea009c8213a8a6685dafd6273d2
+# 1.6.1 release commit
+ENV ZEPPELIN_COMMIT c928f9a46ecacebc868d6dc10a95c02f9018a18e
 RUN set -ex \
  && buildDeps=' \
     git \
@@ -42,7 +44,6 @@ RUN set -ex \
  && git clone https://github.com/apache/zeppelin.git /usr/src/zeppelin \
  && cd /usr/src/zeppelin \
  && git checkout -q $ZEPPELIN_COMMIT \
- && dev/change_scala_version.sh "2.11" \
  && sed -i 's/--no-color/buildSkipTests --no-color/' zeppelin-web/pom.xml \
  && MAVEN_OPTS="-Xms512m -Xmx1024m" /tmp/apache-maven-3.3.9/bin/mvn --batch-mode package -DskipTests -Pscala-2.11 -Pbuild-distr \
   -pl 'zeppelin-interpreter,zeppelin-zengine,zeppelin-display,spark-dependencies,spark,markdown,angular,shell,hbase,postgresql,jdbc,python,elasticsearch,zeppelin-web,zeppelin-server,zeppelin-distribution' \
