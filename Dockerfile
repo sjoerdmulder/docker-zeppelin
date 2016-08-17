@@ -1,5 +1,7 @@
 FROM gettyimages/spark:2.0.0-hadoop-2.7
 
+RUN echo "deb http://ftp.debian.org/debian jessie-backports main contrib non-free" >> /etc/apt/sources.list
+
 # SciPy
 RUN set -ex \
  && buildDeps=' \
