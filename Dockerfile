@@ -17,6 +17,6 @@ WORKDIR $ZEPPELIN_HOME
 
 RUN mkdir -p $ZEPPELIN_HOME \
     && curl http://ftp.nluug.nl/internet/apache/zeppelin/zeppelin-0.6.1/zeppelin-0.6.1-bin-netinst.tgz | tar xz -C $ZEPPELIN_HOME --strip-components=1 \
-    && bin/install-interpreter.sh --name md,shell,cassandra,elasticsearch,angular
+    && bin/install-interpreter.sh --name md,shell,cassandra,elasticsearch,angular,jdbc
 
 CMD ["bin/zeppelin.sh"]
