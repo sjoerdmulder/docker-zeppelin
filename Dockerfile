@@ -46,7 +46,7 @@ RUN curl -sL --retry 3 \
  && chown -R root:root $HADOOP_HOME
 
 # SPARK
-ENV SPARK_VERSION 2.0.2
+ENV SPARK_VERSION 2.1.0
 ENV SPARK_PACKAGE spark-${SPARK_VERSION}-bin-without-hadoop
 ENV SPARK_HOME /usr/spark-${SPARK_VERSION}
 ENV SPARK_DIST_CLASSPATH="$HADOOP_HOME/etc/hadoop/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/yarn/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/tools/lib/*"
@@ -75,7 +75,7 @@ ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:$HADOOP_HOME/lib/native
 WORKDIR $ZEPPELIN_HOME
 
 RUN mkdir -p $ZEPPELIN_HOME \
-    && curl http://mirrors.supportex.net/apache/zeppelin/zeppelin-0.6.2/zeppelin-0.6.2-bin-netinst.tgz | tar xz -C $ZEPPELIN_HOME --strip-components=1 \
+    && curl http://mirrors.supportex.net/apache/zeppelin/zeppelin-0.7.0/zeppelin-0.7.0-bin-netinst.tgz | tar xz -C $ZEPPELIN_HOME --strip-components=1 \
     && bin/install-interpreter.sh --name md,shell,cassandra,elasticsearch,angular,jdbc
 
 CMD ["bin/zeppelin.sh"]
